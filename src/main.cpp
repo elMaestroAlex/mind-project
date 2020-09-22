@@ -10,7 +10,7 @@ using namespace std;
 
 
 std::string readTestModelFile() {
-    std::string fileName = "/Users/alexandr/projects/neuron_models/salary.katemodel";
+    std::string fileName = "D:\\projects\\neuron_models\\salary.katemodel";
     std::ifstream ifs(fileName);
     std::string content( (std::istreambuf_iterator<char>(ifs) ),
                          (std::istreambuf_iterator<char>()) );
