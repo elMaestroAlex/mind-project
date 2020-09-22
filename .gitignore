@@ -1,4 +1,5 @@
-
+.vscode 
+build
 cmake-build-debug
 out/
 .DS_Store
