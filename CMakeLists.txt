@@ -11,4 +11,4 @@ add_executable(kate
         src/parser/AstNode.h
         src/parser/Parser.cpp
         src/parser/Parser.h
-        src/main.cpp)
+        src/main.cpp "src/parser/Lexer.h" "src/parser/Lexer.cpp")
