@@ -26,16 +26,9 @@ struct Lexem {
 
 class Lexer
 {
-    void handleLexem(
-        char character,
-        LexemType type,
-        Lexem& currentLexeme,
-        std::vector<Lexem>& lexems,
-        bool sequenceable = false
-    );
 public:
     Lexer();
-    void getLexems(std::string& code, std::vector<Lexem>& lexems);
+    std::vector<Lexem> getLexems(const std::string& code);
 };
 
 #endif // LEXER_H

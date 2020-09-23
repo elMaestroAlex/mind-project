@@ -21,12 +21,11 @@ int main()
 {
     cout << "KATE greetings you!" << endl;
 
-    AST* modelAst = new AST();
-
-    Parser* parser = new Parser();
-
+    AST modelAst;
+    Parser parser;
     std::string code = readTestModelFile();
-    parser->parse(code, modelAst);
 
+    parser.parse(code, modelAst);
+    
     return 0;
 }

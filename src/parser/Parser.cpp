@@ -9,11 +9,10 @@ Parser::Parser()
 }
 
 
-void Parser::parse(std::string &code, AST *ast) {
+void Parser::parse(const std::string &code, AST &ast) {
     std::cout << code << std::endl;
 
-    std::vector<Lexem> lexemBuffer;
-    lexer->getLexems(code, lexemBuffer);
+    auto lexemBuffer = lexer->getLexems(code);
     std::cout << "File parsed" << std::endl;
 }
 

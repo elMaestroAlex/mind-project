@@ -13,7 +13,7 @@ class Parser
 public:
     Parser();
 
-    void parse(std::string& code, AST* ast);
+    void parse(const std::string& code, AST& ast);
 };
 
 #endif // PARSER_H

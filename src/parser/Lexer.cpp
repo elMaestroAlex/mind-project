@@ -2,47 +2,53 @@
 
 #include <string>
 #include <vector>
+
+namespace {
+
+    void handleLexem(
+        char character,
+        LexemType type,
+        Lexem& currentLexeme,
+        std::vector<Lexem>& lexems,
+        bool sequenceable = false
+    ) {
+        if (currentLexeme._type == LexemType::Comment) {
+            currentLexeme.token += character;
+            return;
+        }
+
+        if (!sequenceable) {
+            lexems.push_back(currentLexeme);
+        }
+        else if (currentLexeme._type != type) {
+            lexems.push_back(currentLexeme);
+        }
+
+        currentLexeme._type = type;
+        currentLexeme.token = "";
+
+    }
+}
+
 Lexer::Lexer() {
 	
 }
 
 
-void Lexer::handleLexem(
-    char character,
-    LexemType type,
-    Lexem& currentLexeme,
-    std::vector<Lexem>& lexems,
-    bool sequenceable
-) {
-    if (currentLexeme._type == LexemType::Comment) {
-        currentLexeme.token += character;
-        return;
-    }
+std::vector<Lexem> Lexer::getLexems(const std::string& code)  {
+    size_t cursor = 0;
+    const auto codeLen = code.size();
+    std::vector<Lexem> lexems;
 
-    if (!sequenceable) {
-        lexems.push_back(currentLexeme);
-    }
-    else if (currentLexeme._type != type) {
-        lexems.push_back(currentLexeme);
-    }
-
-    currentLexeme._type = type;
-    currentLexeme.token = "";
-
-}
-
-void Lexer::getLexems(std::string& code, std::vector<Lexem>& lexems) {
-    unsigned int cursor = 0;
-    unsigned int codeLen = code.size();
     if (codeLen == 0) {
-        return;
+        return lexems;
     }
 
     Lexem lexem;
 
     while (true) {
         if (cursor >= codeLen) {
-            return;
+            return lexems;
         }
         char character = code[cursor];
         bool isLast = cursor >= codeLen - 1;
@@ -108,10 +114,11 @@ void Lexer::getLexems(std::string& code, std::vector<Lexem>& lexems) {
 
         if (isLast) {
             lexems.push_back(lexem);
-            return;
+            return lexems;
         }
 
         ++cursor;
     } // while (true)
 
+    return lexems;
 }
