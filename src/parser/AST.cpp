@@ -4,5 +4,5 @@
 
 AST::AST()
 {
-    std::cout << "Ast constructor" << std::endl;
 }
+

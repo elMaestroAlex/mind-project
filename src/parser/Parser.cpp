@@ -1,18 +1,44 @@
 #include "Parser.h"
+#include "ast-nodes/AstNodeFile.h"
+
+#include <fstream>
 
 #include <iostream>
 #include <vector>
+#include <memory>
 
-Parser::Parser()
+Parser::Parser() :
+    m_lexer { new Lexer() }
 {
-    lexer = new Lexer();
 }
 
 
-void Parser::parse(const std::string &code, AST &ast) {
-    std::cout << code << std::endl;
+std::string Parser::readFileContent(const std::string& fileName) {
+    std::ifstream ifs(fileName);
+    std::string content((std::istreambuf_iterator<char>(ifs)),
+        (std::istreambuf_iterator<char>()));
 
-    auto lexemBuffer = lexer->getLexems(code);
-    std::cout << "File parsed" << std::endl;
+    return content;
 }
 
+
+void Parser::parse(const std::string& indexFileName, AST &ast) {
+    AstNodeAbstractUptr rootNode(new AstNodeProjectRoot(indexFileName));
+    AstNodeAbstractUptr indexFileNode(new AstNodeFile(indexFileName));
+    
+    rootNode->addChild(std::move(indexFileNode));
+    ast.setRootNode(std::move(rootNode));
+
+    std::string code = readFileContent(indexFileName);
+
+    auto lexemBuffer = m_lexer->getLexems(code);
+    if (lexemBuffer.size() == 0) {
+        return;
+    }
+
+    syntesAst(lexemBuffer, ast.getRootNode()->getChildren()[0].get());
+}
+
+void Parser::syntesAst(const std::vector<Lexem> lexems, AstNodeAbstract* contextNode) {
+    std::cout << "syntes" << std::endl;
+}

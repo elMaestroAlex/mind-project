@@ -5,15 +5,20 @@
 
 #include "AST.h"
 #include "Lexer.h"
-
+#include <memory>
 
 class Parser
 {
-    Lexer* lexer;
 public:
     Parser();
+    void parse(const std::string& indexFileName, AST& ast);
 
-    void parse(const std::string& code, AST& ast);
+private:
+    std::string readFileContent(const std::string& fileName);
+    void syntesAst(const std::vector<Lexem> lexems, AstNodeAbstract* contextNode);
+
+private:
+    std::unique_ptr<Lexer> m_lexer;
 };
 
 #endif // PARSER_H

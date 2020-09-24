@@ -8,12 +8,15 @@ include_directories(src/parser)
 add_executable(kate
         src/parser/AST.cpp
         src/parser/AST.h
-        src/parser/ast-nodes/AstNodeAbstract.h
         src/parser/Parser.cpp
         src/parser/Parser.h
         src/main.cpp 
         src/parser/Lexer.h 
         src/parser/Lexer.cpp
-        src/parser/ast-nodes/AstNodeModel.h
-        src/parser/ast-nodes/AstNodeModel.cpp
+        "src/parser/ast-nodes/AstNodeModel.h"
+        "src/parser/ast-nodes/AstNodeModel.cpp"
+        "src/parser/ast-nodes/AstNodeAbstract.h"
+        "src/parser/ast-nodes/AstNodeFile.cpp"
+        "src/parser/ast-nodes/AstNodeProjectRoot.cpp"
+        "src/parser/ast-nodes/AstNodeProjectRoot.h"
 )
