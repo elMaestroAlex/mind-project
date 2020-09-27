@@ -12,7 +12,7 @@ namespace {
         std::vector<Lexem>& lexems,
         bool sequenceable = false
     ) {
-        if (currentLexeme._type == LexemType::Comment) {
+        if (currentLexeme.type == LexemType::Comment) {
             currentLexeme.token += character;
             return;
         }
@@ -20,11 +20,11 @@ namespace {
         if (!sequenceable) {
             lexems.push_back(currentLexeme);
         }
-        else if (currentLexeme._type != type) {
+        else if (currentLexeme.type != type) {
             lexems.push_back(currentLexeme);
         }
 
-        currentLexeme._type = type;
+        currentLexeme.type = type;
         currentLexeme.token = "";
 
     }
@@ -65,9 +65,9 @@ std::vector<Lexem> Lexer::getLexems(const std::string& code)  {
             handleLexem(character, LexemType::Space, lexem, lexems, true);
             break;
         case '\n':
-            if (lexem._type != LexemType::EndLine) {
+            if (lexem.type != LexemType::EndLine) {
                 lexems.push_back(lexem);
-                lexem._type = LexemType::EndLine;
+                lexem.type = LexemType::EndLine;
                 lexem.token = "";
             }
             break;
@@ -90,24 +90,24 @@ std::vector<Lexem> Lexer::getLexems(const std::string& code)  {
 
             // comments
         case '/':
-            if (lexem._type != LexemType::Comment && lexem._type != LexemType::Divide) {
+            if (lexem.type != LexemType::Comment && lexem.type != LexemType::Divide) {
                 lexems.push_back(lexem);
             }
 
             if (lookahead == '/') {
-                lexem._type = LexemType::Comment;
+                lexem.type = LexemType::Comment;
                 lexem.token = "//";
                 cursor++;
             }
             else {
-                lexem._type = LexemType::Divide;
+                lexem.type = LexemType::Divide;
             }
             break;
 
 
         default:
-            if (lexem._type != LexemType::Comment) {
-                lexem._type = LexemType::Token;
+            if (lexem.type != LexemType::Comment) {
+                lexem.type = LexemType::Token;
             }
             lexem.token += character;
         }

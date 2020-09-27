@@ -36,9 +36,35 @@ void Parser::parse(const std::string& indexFileName, AST &ast) {
         return;
     }
 
-    syntesAst(lexemBuffer, ast.getRootNode()->getChildren()[0].get());
+    syntesAst(lexemBuffer, 0, ast.getRootNode()->getChildren()[0].get());
 }
 
-void Parser::syntesAst(const std::vector<Lexem> lexems, AstNodeAbstract* contextNode) {
-    std::cout << "syntes" << std::endl;
+void Parser::syntesAst(const std::vector<Lexem>& lexems, int lexemCursor, AstNodeAbstract* contextNode) {
+    size_t size = lexems.size();
+    
+    AstNodeAbstract* parentContext = contextNode;
+
+    for (int cursor = lexemCursor; cursor < size; ) {
+        const Lexem& lexem = lexems[cursor];
+
+        std::unique_ptr<AstNodeAbstract> treeNode = getTreeNodeByLexem(lexems[cursor]);
+
+        std::cout << "syntes" << std::endl;
+        ++cursor;
+    }
+
+}
+
+std::unique_ptr< AstNodeAbstract > Parser::getTreeNodeByLexem(const Lexem& lexem) {
+    if (lexem.type == LexemType::Token) {
+        //switch (lexem.token)
+        //{
+        //case "": 
+        //    break;
+        //default:
+        //    break;
+        //}
+    }
+
+    return nullptr;
 }

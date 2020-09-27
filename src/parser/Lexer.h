@@ -20,7 +20,7 @@ enum class LexemType {
 };
 
 struct Lexem {
-    LexemType  _type;
+    LexemType  type;
     std::string token;
 };
 
