@@ -2,8 +2,25 @@
 
 #include <string>
 #include <vector>
+#include <map>
 
 namespace {
+
+    std::map<std::string, LexemType> __tokenToLexemCastMap = {
+        {"model", LexemType::Model },
+        {"placeholder", LexemType::Placeholder },
+        {"variable", LexemType::Variable },
+        {"int", LexemType::Int },
+        {"float", LexemType::Float },
+        {"logic", LexemType::Logic },
+    };
+
+    void pushLexem(Lexem& lexem, std::vector<Lexem>& lexems) {
+        if (lexem.type == LexemType::Token && __tokenToLexemCastMap.find(lexem.token) != __tokenToLexemCastMap.end()) {
+            lexem.type = __tokenToLexemCastMap[lexem.token];
+        }
+        lexems.push_back(lexem);
+    }
 
     void handleLexem(
         char character,
@@ -18,10 +35,10 @@ namespace {
         }
 
         if (!sequenceable) {
-            lexems.push_back(currentLexeme);
+            pushLexem(currentLexeme, lexems);
         }
         else if (currentLexeme.type != type) {
-            lexems.push_back(currentLexeme);
+            pushLexem(currentLexeme, lexems);
         }
 
         currentLexeme.type = type;
@@ -66,7 +83,7 @@ std::vector<Lexem> Lexer::getLexems(const std::string& code)  {
             break;
         case '\n':
             if (lexem.type != LexemType::EndLine) {
-                lexems.push_back(lexem);
+                pushLexem(lexem, lexems);
                 lexem.type = LexemType::EndLine;
                 lexem.token = "";
             }
@@ -91,7 +108,7 @@ std::vector<Lexem> Lexer::getLexems(const std::string& code)  {
             // comments
         case '/':
             if (lexem.type != LexemType::Comment && lexem.type != LexemType::Divide) {
-                lexems.push_back(lexem);
+                pushLexem(lexem, lexems);
             }
 
             if (lookahead == '/') {
@@ -113,7 +130,7 @@ std::vector<Lexem> Lexer::getLexems(const std::string& code)  {
         }
 
         if (isLast) {
-            lexems.push_back(lexem);
+            pushLexem(lexem, lexems);
             return lexems;
         }
 

@@ -17,6 +17,14 @@ enum class LexemType {
     Minus,
     Divide,
     Multiply,
+
+    // language entities and reserved words
+    Model,
+    Placeholder,
+    Logic,
+    Variable,
+    Int,
+    Float,
 };
 
 struct Lexem {
