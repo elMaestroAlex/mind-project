@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-    cout << "KATE greetings you!" << endl;
+    cout << "Mind Engine greetings you!" << endl;
 
     std::string fileName = std::string(argv[1]);
 
