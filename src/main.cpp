@@ -6,11 +6,11 @@
 
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
     cout << "KATE greetings you!" << endl;
 
-    std::string fileName = "D:\\projects\\neuron_models\\salary.katemodel";
+    std::string fileName = std::string(argv[1]);
 
     AST modelAst;
     Parser parser;
