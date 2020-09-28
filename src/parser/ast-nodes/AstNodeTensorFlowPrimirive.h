@@ -9,11 +9,11 @@
 class AstNodeTensorFlowPrimirive : public AstNodeAbstract {
 public:
 	AstNodeTensorFlowPrimirive(LexemType lexemType);
-	AstNodeType getType() const override { return m_nodeType; };
+	AstNodeKind getKind() const override { return m_nodeType; };
 	void setName(const std::string nodeName) { m_nodeName = nodeName;  };
 
 private:
-	AstNodeType m_nodeType;
+	AstNodeKind m_nodeType;
 	std::string m_nodeName;
 };
 

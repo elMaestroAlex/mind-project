@@ -4,10 +4,10 @@
 #include "AstNodeTensorFlowPrimirive.h"
 
 namespace {
-	std::map<LexemType, AstNodeType> __lexemToAstTypeMap = {
-		{LexemType::Placeholder, AstNodeType::Placeholder},
-		{LexemType::Variable, AstNodeType::Variable},
-		{LexemType::Constant, AstNodeType::Constant}
+	std::map<LexemType, AstNodeKind> __lexemToAstTypeMap = {
+		{LexemType::Placeholder, AstNodeKind::Placeholder},
+		{LexemType::Variable, AstNodeKind::Variable},
+		{LexemType::Constant, AstNodeKind::Constant}
 	};
 }
 

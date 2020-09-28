@@ -8,10 +8,10 @@
 class AstNodeFile : public  AstNodeAbstract {
 public:
 	AstNodeFile(std::string filePath);
-	AstNodeType getType() const override { return m_nodeType; };
+	AstNodeKind getKind() const override { return m_nodeType; };
 
 private:
-	const AstNodeType m_nodeType;
+	const AstNodeKind m_nodeType;
 	const std::string m_filePath;
 };
 
