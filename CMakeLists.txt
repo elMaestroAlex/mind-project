@@ -13,10 +13,8 @@ add_executable(mind
         src/main.cpp 
         src/parser/Lexer.h 
         src/parser/Lexer.cpp
-        "src/parser/ast-nodes/AstNodeModel.h"
-        "src/parser/ast-nodes/AstNodeModel.cpp"
-        "src/parser/ast-nodes/AstNodeAbstract.h"
-        "src/parser/ast-nodes/AstNodeFile.cpp"
-        "src/parser/ast-nodes/AstNodeProjectRoot.cpp"
-        "src/parser/ast-nodes/AstNodeProjectRoot.h"
+        "src/parser/ast-nodes/AstNodeModel.h" "src/parser/ast-nodes/AstNodeModel.cpp"
+        "src/parser/ast-nodes/AstNodeAbstract.h" "src/parser/ast-nodes/AstNodeFile.cpp"
+        "src/parser/ast-nodes/AstNodeProjectRoot.h" "src/parser/ast-nodes/AstNodeProjectRoot.cpp"
+        "src/parser/ast-nodes/AstNodeTensorFlowPrimirive.h"  "src/parser/ast-nodes/AstNodeTensorFlowPrimirive.cpp"
 )

@@ -23,6 +23,7 @@ enum class LexemType {
     Placeholder,
     Logic,
     Variable,
+    Constant,
     Int,
     Float,
 };
