@@ -4,11 +4,9 @@
 #include "parser/AST.h"
 #include "parser/Parser.h"
 
-using namespace std;
-
 int main(int argc, char* argv[])
 {
-    cout << "Mind Engine greetings you!" << endl;
+    std::cout << "Mind Engine greetings you!" << std::endl;
 
     std::string fileName = std::string(argv[1]);
 
