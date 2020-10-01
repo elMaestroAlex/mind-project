@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 {
     std::cout << "Mind Engine greetings you!" << std::endl;
 
-    std::string fileName = std::string(argv[1]);
+    std::string fileName = argv[1];
 
     AST modelAst;
     Parser parser;
