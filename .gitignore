@@ -1,3 +1,5 @@
+enc_temp_folder/
+
 .vscode 
 build
 cmake-build-debug
