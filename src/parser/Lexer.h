@@ -31,6 +31,10 @@ enum class LexemType {
 struct Lexem {
     LexemType  type;
     std::string token;
+    
+    bool isTypeLexem() const {
+        return type == LexemType::Float || type == LexemType::Int;
+    }
 };
 
 class Lexer

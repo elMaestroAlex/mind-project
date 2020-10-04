@@ -5,6 +5,7 @@
 
 #include "AST.h"
 #include "Lexer.h"
+#include "ast-nodes/AstNodeTensorFlowPrimirive.h"
 #include <memory>
 
 class Parser
@@ -17,9 +18,11 @@ private:
     std::string readFileContent(const std::string& fileName);
     void syntesAst(const std::vector<Lexem>& lexems, unsigned int lexemCursor, AstNodeAbstract* contextNode);
 
-    AstNodeAbstractUptr buildModelNode(const std::vector<Lexem>& lexems, unsigned int& cursor);
     int getNextLexemPos(const std::vector<Lexem>& lexems, const unsigned int cursor);
 
+    // language entities
+    AstNodeAbstract* buildModelNode(const std::vector<Lexem>& lexems, unsigned int& cursor);
+    AstNodeTensorFlowPrimirive* buildTensorFlowEntity(const std::vector<Lexem>& lexems, unsigned int& cursor);
 private:
     std::unique_ptr<Lexer> m_lexer;
 };

@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+#include <string>
 
 class AstNodeAbstract;
 
@@ -31,7 +32,12 @@ public:
         m_chidlren.push_back(std::move(child));
     }
 
-private:
+    void addChild(AstNodeAbstract* child) {
+        m_chidlren.push_back(AstNodeAbstractUptr(child));
+    }
+
+    virtual std::string toString() const { return "Undefined";  }
+// private:
     std::vector<AstNodeAbstractUptr> m_chidlren;
 
 };

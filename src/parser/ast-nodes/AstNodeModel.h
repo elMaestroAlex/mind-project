@@ -10,7 +10,8 @@ public:
 	AstNodeModel(std::string token);
 	AstNodeKind getKind() const override { return m_nodeType; };
 
-private:
+	std::string toString() const override { return "Model: " + m_nodeName; }
+// private:
 	const AstNodeKind m_nodeType;
 	const std::string m_nodeName;
 };
