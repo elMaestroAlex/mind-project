@@ -37,7 +37,7 @@ public:
     }
 
     virtual std::string toString() const { return "Undefined";  }
-// private:
+private:
     std::vector<AstNodeAbstractUptr> m_chidlren;
 
 };

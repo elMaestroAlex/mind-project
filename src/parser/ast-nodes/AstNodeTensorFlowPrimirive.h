@@ -17,7 +17,7 @@ public:
 	void setName(const std::string nodeName) { m_primitiveName = nodeName;  };
 	std::string toString() const override { return "TensorFlowPrimirive: " + m_primitiveName + " -> " + m_primitiveType; }
 
-// private:
+private:
 	AstNodeKind m_nodeKind;
 	std::string m_primitiveName;
 	std::string m_primitiveType;
