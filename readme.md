@@ -31,8 +31,11 @@ Tensorflow is great but complex framework. Mind project allow you following aspe
 ## Contacts
 
 Alexandr Baranetskiy
+
 Skype: asterai.com
+
 gmail: asterai.com@gmail.com
+
 Linked In: https://www.linkedin.com/in/alexandr-baranezky-33151ba8/
 
 Feel free to cantact me in order to collaboration
