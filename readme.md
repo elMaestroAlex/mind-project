@@ -24,7 +24,7 @@ model Salary {
 Tensorflow is great but complex framework. Mind project allow you following aspects
 * Write TensorFlow models in declarative way
 * Include submodels to models (deep learning) just in 1 string
-* Buildc complex graphs in cascade style
+* Build complex graphs in cascade style
 * Export graphs from TF models trained by Python to Mind and vice versa.
 * Reduce requrements of math for TF users
 
