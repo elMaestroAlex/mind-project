@@ -6,7 +6,7 @@
 ```
 model Salary {
 	
-	placeholder prestige float
+    placeholder prestige float
 
     placeholder years int
 
