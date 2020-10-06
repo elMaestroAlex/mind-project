@@ -4,18 +4,22 @@
 
 #### Example simple linear regressions TensorFlow  graph
 ```
+
+// Define a Simple tensorflow mode, 
+// that represents linear regression
 model Salary {
 	
+    // Difine graph entities, scalars
     placeholder prestige float
 
     placeholder years int
 
     variable x float
 
-    output {
-         prestige + years * x
+    // Graph execution logic
+    logic {
+         return prestige + years * x
     }
-
 }
 ```
 
