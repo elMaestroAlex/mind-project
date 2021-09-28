@@ -9,7 +9,7 @@
 // that represents linear regression
 model Salary {
 	
-    // Difine graph entities, scalars
+    // Define graph entities, scalars
     placeholder prestige float
 
     placeholder years int

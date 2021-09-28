@@ -2,6 +2,8 @@
 #include "ast-nodes/AstNodeFile.h"
 #include "ast-nodes/AstNodeModel.h"
 #include "ast-nodes/AstNodeTensorFlowPrimirive.h"
+#include "ast-nodes/AstNodeMethod.h"
+#include "ast-nodes/AstNodeExpression.h"
 
 #include <fstream>
 
@@ -9,6 +11,7 @@
 #include <vector>
 #include <stack>
 #include <memory>
+
 
 Parser::Parser() :
     m_lexer { new Lexer() }
@@ -56,7 +59,7 @@ void Parser::parse(const std::string& indexFileName, AST &ast) {
     syntesAst(lexemBuffer, 0, nodeFile);
 
     ast.dumpAsString();
-    std::cout << "Test " << std::endl;
+    std::cout << "" << std::endl;
 }
 
 void Parser::syntesAst(const std::vector<Lexem>& lexems, unsigned int lexemCursor, AstNodeAbstract* contextNode) {
@@ -67,7 +70,7 @@ void Parser::syntesAst(const std::vector<Lexem>& lexems, unsigned int lexemCurso
 
     AstNodeAbstract* lastNode = nullptr;
 
-    for (unsigned int cursor = lexemCursor; cursor < size; ) {
+    for (unsigned int cursor = lexemCursor; cursor < size - 1; ) {
         const Lexem& lexem = lexems[cursor];
 
         switch (lexem.type) {
@@ -86,9 +89,13 @@ void Parser::syntesAst(const std::vector<Lexem>& lexems, unsigned int lexemCurso
         case LexemType::Placeholder:
         case LexemType::Constant:
         case LexemType::Variable:
-            AstNodeTensorFlowPrimirive* primitiveNode = buildTensorFlowEntity(lexems, cursor);
-            contextNode->addChild(primitiveNode);
-            std::cout << "" << std::endl;
+            contextNode->addChild(buildTensorFlowEntity(lexems, cursor));
+            break;
+        case LexemType::Return:
+            contextNode->addChild(buildExpressionNode(lexems, cursor));
+            break;
+        case LexemType::Logic:
+            lastNode = new AstNodeMethod("logic");
             break;
 
         }
@@ -99,9 +106,12 @@ void Parser::syntesAst(const std::vector<Lexem>& lexems, unsigned int lexemCurso
 }
 
 
-AstNodeAbstract* Parser::buildModelNode(const std::vector<Lexem>& lexems, unsigned int& cursor) {
-    size_t size = lexems.size();
 
+AstNodeAbstract* Parser::buildExpressionNode(const std::vector<Lexem>& lexems, unsigned int& cursor) {
+    return new AstNodeExpression("x + y + z");
+}
+
+AstNodeAbstract* Parser::buildModelNode(const std::vector<Lexem>& lexems, unsigned int& cursor) {
     ++cursor;
 
     unsigned int nextLexemIndex = getNextLexemPos(lexems, cursor);
@@ -124,7 +134,6 @@ AstNodeAbstract* Parser::buildModelNode(const std::vector<Lexem>& lexems, unsign
 }
 
 AstNodeTensorFlowPrimirive* Parser::buildTensorFlowEntity(const std::vector<Lexem>& lexems, unsigned int& cursor) {
-    size_t size = lexems.size();
 
     auto currentLexem = lexems[cursor];
     ++cursor;

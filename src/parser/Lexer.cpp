@@ -8,11 +8,20 @@ namespace {
 
     std::map<std::string, LexemType> __tokenToLexemCastMap = {
         {"model", LexemType::Model },
+
+        // tensorflow entities
         {"placeholder", LexemType::Placeholder },
         {"variable", LexemType::Variable },
+
+        // types
         {"int", LexemType::Int },
         {"float", LexemType::Float },
+
+        // method
         {"logic", LexemType::Logic },
+
+        // statement
+        {"return", LexemType::Return}
     };
 
     void pushLexem(Lexem& lexem, std::vector<Lexem>& lexems) {

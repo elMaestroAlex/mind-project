@@ -26,6 +26,9 @@ enum class LexemType {
     Constant,
     Int,
     Float,
+
+    //Statements
+    Return
 };
 
 struct Lexem {

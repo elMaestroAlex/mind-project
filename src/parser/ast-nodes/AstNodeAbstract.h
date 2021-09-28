@@ -18,8 +18,8 @@ enum class AstNodeKind {
     Placeholder,
     Variable,
     Constant,
-    Output,
-    NamedObject // variables inside the logic blocks
+    Method,
+    Expression
 };
 
 
