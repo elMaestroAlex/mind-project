@@ -22,8 +22,7 @@ private:
 
     // language entities
     AstNodeAbstract* buildModelNode(const std::vector<Lexem>& lexems, unsigned int& cursor);
-    AstNodeAbstract* buildMethodNode(const std::vector<Lexem>& lexems, unsigned int& cursor);
-    AstNodeAbstract* buildExpressionNode(const std::vector<Lexem>& lexems, unsigned int& cursor);
+    AstNodeAbstract* buildReturnExpressionNode(const std::vector<Lexem>& lexems, unsigned int& cursor);
 
     AstNodeTensorFlowPrimirive* buildTensorFlowEntity(const std::vector<Lexem>& lexems, unsigned int& cursor);
 private:

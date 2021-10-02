@@ -5,9 +5,9 @@
 
 #include "AstNodeAbstract.h"
 
-class AstNodeExpression : public  AstNodeAbstract {
+class AstNodeReturnExpression : public  AstNodeAbstract {
 public:
-    AstNodeExpression(std::string token);
+    AstNodeReturnExpression(std::string token);
 	AstNodeKind getKind() const override { return m_nodeType; };
 
 	std::string toString() const override { return "Expression: " + m_nodeName; }

@@ -19,7 +19,7 @@ enum class AstNodeKind {
     Variable,
     Constant,
     Method,
-    Expression
+    ReturnExpression
 };
 
 

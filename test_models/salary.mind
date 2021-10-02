@@ -1,4 +1,4 @@
-// Define a Simple tensorflow mode,
+// Define a Simple tensorflow model,
 // that represents linear regression
 model Salary {
 

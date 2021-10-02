@@ -3,7 +3,7 @@
 #include "ast-nodes/AstNodeModel.h"
 #include "ast-nodes/AstNodeTensorFlowPrimirive.h"
 #include "ast-nodes/AstNodeMethod.h"
-#include "ast-nodes/AstNodeExpression.h"
+#include "ast-nodes/AstNodeReturnExpression.h"
 
 #include <fstream>
 
@@ -92,23 +92,20 @@ void Parser::syntesAst(const std::vector<Lexem>& lexems, unsigned int lexemCurso
             contextNode->addChild(buildTensorFlowEntity(lexems, cursor));
             break;
         case LexemType::Return:
-            contextNode->addChild(buildExpressionNode(lexems, cursor));
+            contextNode->addChild(buildReturnExpressionNode(lexems, cursor));
             break;
         case LexemType::Logic:
             lastNode = new AstNodeMethod("logic");
             break;
-
         }
-        
         ++cursor;
     }
 
 }
 
 
-
-AstNodeAbstract* Parser::buildExpressionNode(const std::vector<Lexem>& lexems, unsigned int& cursor) {
-    return new AstNodeExpression("x + y + z");
+AstNodeAbstract* Parser::buildReturnExpressionNode(const std::vector<Lexem>& lexems, unsigned int& cursor) {
+    return new AstNodeReturnExpression("x + y + z");
 }
 
 AstNodeAbstract* Parser::buildModelNode(const std::vector<Lexem>& lexems, unsigned int& cursor) {
