@@ -10,7 +10,7 @@ public:
     AstNodeReturnExpression(std::string token);
 	AstNodeKind getKind() const override { return m_nodeType; };
 
-	std::string toString() const override { return "Expression: " + m_nodeName; }
+	std::string toString() const override { return "Expression(Return): " + m_nodeName; }
 // private:
 	const AstNodeKind m_nodeType;
 	const std::string m_nodeName;
