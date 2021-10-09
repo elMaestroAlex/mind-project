@@ -31,12 +31,16 @@ enum class LexemType {
     Return
 };
 
-struct Lexem {
+struct  Lexem {
     LexemType  type;
     std::string token;
     
-    bool isTypeLexem() const {
+    bool isTypeLexeme() const {
         return type == LexemType::Float || type == LexemType::Int;
+    }
+
+    bool isPhantomLexeme() const {
+        return type == LexemType::Token && token.empty();
     }
 };
 

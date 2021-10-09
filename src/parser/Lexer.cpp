@@ -116,7 +116,7 @@ std::vector<Lexem> Lexer::getLexems(const std::string& code)  {
 
             // comments
         case '/':
-            if (lexem.type != LexemType::Comment && lexem.type != LexemType::Divide) {
+            if (lexem.type != LexemType::Comment && lexem.type != LexemType::Divide && !lexem.isPhantomLexeme()) {
                 pushLexem(lexem, lexems);
             }
 

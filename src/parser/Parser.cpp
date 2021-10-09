@@ -69,7 +69,7 @@ void Parser::syntesAst(const std::vector<Lexem>& lexems, unsigned int lexemCurso
     contextNodeStack.push(contextNode);
 
     AstNodeAbstract* lastNode = nullptr;
-
+    bool isStatementLine = false;
     for (unsigned int cursor = lexemCursor; cursor < size - 1; ) {
         const Lexem& lexem = lexems[cursor];
 
@@ -92,20 +92,33 @@ void Parser::syntesAst(const std::vector<Lexem>& lexems, unsigned int lexemCurso
             contextNode->addChild(buildTensorFlowEntity(lexems, cursor));
             break;
         case LexemType::Return:
-            contextNode->addChild(buildReturnExpressionNode(lexems, cursor));
+            lastNode = new AstNodeReturnExpression("");
+            contextNode->addChild(lastNode);
+            contextNode = lastNode;
+            contextNodeStack.push(contextNode);
+            isStatementLine = true;
             break;
         case LexemType::Logic:
             lastNode = new AstNodeMethod("logic");
+            break;
+        case LexemType::Minus:
+        case LexemType::Plus:
+        case LexemType::Multiply:
+        case LexemType::Divide:
+        case LexemType::Token:
+            std::cout << "\"" << lexems[cursor].token << "\"" << std::endl;
+            break;
+        case LexemType::EndLine:
+            if (isStatementLine) {
+                isStatementLine = false;
+                contextNodeStack.pop();
+                contextNode = contextNodeStack.top();
+            }
             break;
         }
         ++cursor;
     }
 
-}
-
-
-AstNodeAbstract* Parser::buildReturnExpressionNode(const std::vector<Lexem>& lexems, unsigned int& cursor) {
-    return new AstNodeReturnExpression("x + y + z");
 }
 
 AstNodeAbstract* Parser::buildModelNode(const std::vector<Lexem>& lexems, unsigned int& cursor) {
@@ -160,7 +173,7 @@ AstNodeTensorFlowPrimirive* Parser::buildTensorFlowEntity(const std::vector<Lexe
     cursor = propertyTypeLexemeIndex;
     const Lexem& propertyTypeLexeme = lexems[cursor];
 
-    if (!propertyTypeLexeme.isTypeLexem()) {
+    if (!propertyTypeLexeme.isTypeLexeme()) {
         std::cout << "Type token expexted. But " << propertyNameLexeme.token << " found" << std::endl;
         return nullptr;
     }
